@@ -1,0 +1,59 @@
+# Arrangement des equations 
+
+See = constante (Pression de la pompe 1)
+Se1e = constante (Pression de la pompe 2)
+
+#dynamic equations
+# Les variables liées aux states 
+Ct1e = Ct1state / Ct1c 
+Ct2e = Ct2state / Ct2c
+Ic1f = Ic1state / Ic1i
+Ic10f = Ic10state / Ic10i
+Ic11f = Ic11state / Ic11i
+Ic2f = Ic2state / Ic2i
+Ic4f = Ic4state / Ic4i;
+Ic6f = Ic6state / Ic6i;
+Ic7f = Ic7state / Ic7i;
+# Les etats de resistance 
+Rp1e = Rp1r * Ic1f
+Rp10e = Rp10r * Ic10f
+Rp11e = Rp11r * Ic11f
+Rp2e = Rp2r * Ic2f
+Rp4e = Rp4r * Ic4f
+Rp6e = Rp6r * Ic6f
+Rp7e = Rp7r * Ic7f
+Rv1e = Rv1r * Ic1f
+Rv10e = Rv10r * Ic10f
+Rv2e = Rv2r * Ic2f
+Rv4e = Rv4r * Ic4f
+Rv6e = Rv6r * Ic6f
+Rv7e = Rv7r * Ic7f
+# Les variables de haut niveau 
+ZeroJunctionf = Ic1f - Ic2f
+ZeroJunction1f = Ic4f - Ic6f
+Ic7e = (Ct1e - Rp7e) - Rv7e
+Ic10e = (Ct2e - Rp10e) - Rv10e
+Ic3state = ZeroJunctionf * Ic3i
+Ic5state = ZeroJunction1f * Ic5i
+Rp3e = Rp3r * ZeroJunctionf
+Rp5e = Rp5r * ZeroJunction1f
+Rv3e = Rv3r * ZeroJunctionf
+Rv5e = Rv5r * ZeroJunction1f
+Ic3e_in = (((((See - Rp1e) - Rv1e) - (Rv3e + Rp3e)) / Ic1i - (((Rv3e + Rp3e) - Rp2e) - Rv2e) / Ic2i) * Ic3i) / (1.0 + (1.0 / Ic1i + 1.0 / Ic2i) * Ic3i)
+Ic5e_in = (((((Se1e - Rp4e) - Rv4e) - (Rv5e + Rp5e)) / Ic4i - (((Rv5e + Rp5e) - Rp6e) - Rv6e) / Ic6i) * Ic5i) / (1.0 + (1.0 / Ic4i + 1.0 / Ic6i) * Ic5i)
+Conduit3e = (Ic3e_in + Rv3e) + Rp3e
+Conduit5e = (Ic5e_in + Rv5e) + Rp5e
+Ic1e = ((See - Rp1e) - Rv1e) - Conduit3e
+Ic4e = ((Se1e - Rp4e) - Rv4e) - Conduit5e
+Ic6e = (Conduit5e - Rp6e) - Rv6e
+Ic2e = (Conduit3e - Rp2e) - Rv2e
+Rp8f = ((Ct1e - ((Ct2e - Rv9r * Ic11f) - Rp9r * Ic11f)) / Rp8r) / (1.0 + (Rv8r + (Rv9r + Rp9r)) / Rp8r)
+Rv8e = Rv8r * Rp8f;
+Ct1f = (Ic2f + ZeroJunction1f) - (Rp8f + Ic7f)
+ZeroJunction4f = Ic11f - Rp8f
+Rp9e = Rp9r * ZeroJunction4f
+Ct2f = (ZeroJunctionf + Ic6f) - (Ic10f + ZeroJunction4f)
+Rv9e = Rv9r * ZeroJunction4f
+Conduit9e = (Ct2e - Rv9e) - Rp9e
+Conduit8e = (Ct1e - Rv8e) - Conduit9e
+Ic11e = Conduit9e - Rp11e
