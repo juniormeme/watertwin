@@ -52,6 +52,7 @@ def loading():
     else : 
         window.destroy()
         execute_script_with_sys()  
+        print("enregistrement des donnees du programme")
            
 window.after(0,loading)
 

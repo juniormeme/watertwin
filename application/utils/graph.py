@@ -23,7 +23,7 @@ class Graphique(ttk.Labelframe) :
         self.plot.get_tk_widget().grid(row=0,column=0,sticky='nsew',)
         self.vision = True
         self.vision_btn = ttk.Button(self,text="voir",bootstyle="success",command=self.changerEtat)
-        self.vision_btn.grid(row=1,column=0,ipadx=8,ipady=5,sticky='w')
+        self.vision_btn.grid(row=1,column=0,ipadx=10,ipady=6,sticky='w')
     
     def changerEtat(self):
         if self.vision == True : 

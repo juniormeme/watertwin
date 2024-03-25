@@ -23,11 +23,11 @@ class TwinApp(ttk.Frame):
         # Les variables de manipulation du DT
         self.compteur = 0 
         self.model = HydraulicModel(name="Test mode")
-        self.model.marge = 100
+        self.model.marge = 10000
         self.model.pas = 0.1
         #on allume les pompes
-        self.model.CommandePompe['PMP01'] = 0
-        self.model.CommandePompe['PMP02'] = 0
+        self.model.CommandePompe['PMP01'] = 1
+        self.model.CommandePompe['PMP02'] = 1
         # les variables de manipulation des widgets venant du master
         self.gauges = []
         self.monitoring_time = tk.StringVar()

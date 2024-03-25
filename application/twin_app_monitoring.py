@@ -84,6 +84,7 @@ class ModelMonitoring(ttk.Frame) :
                 rate2 = 1
             com.writeValues({
                 'RIEN' : 0,
+                'CADC01' :self.twin_app.model.Y['CADC01'][-1],
                 'CADC02':self.twin_app.model.Y['CADC02'][-1],
                 'CADC03':self.twin_app.model.Y['CADC03'][-1],
                 'CADC05':self.twin_app.model.Y['CADC05'][-1],
@@ -96,7 +97,7 @@ class ModelMonitoring(ttk.Frame) :
             })
             self.k += 1  
         else :
-            self.figs[0].vision_btn.configure(text="Solveur : Calcul temps réel en pause...", bootstyle="danger")
+            self.figs[0].vision_btn.configure(text="Solveur : Calcul temps réel en arret...", bootstyle="danger")
         self.figs[0].after(1,self.figure1)
     def figure2(self):
         "On va monitorer le debit principale du conduit 1 + debit conduit 2 et 3"
@@ -139,7 +140,7 @@ class ModelMonitoring(ttk.Frame) :
             self.figs[4].axe.clear()
             self.figs[4].axe.grid()
             self.figs[4].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CANTK1'],color='C0',label="CANTK1[m]")
-            self.figs[4].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CAPTK1'],color='C1',label="CAPTK1[Pa]")
+            #self.figs[4].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CAPTK1'],color='C1',label="CAPTK1[Pa]")
             self.figs[4].axe.legend()
             self.figs[4].figure.canvas.draw()
             self.figs[4].figure.canvas.flush_events()      
