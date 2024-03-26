@@ -91,11 +91,17 @@ class ScenarioApp(ttk.Frame):
             stretch=False
         )
         # pour inserer les valeurs 
-        for i in range(10): 
+        valeur = [
+            ["Commutation Vanne 1","20-03-2024","/scenario_folder/scene1.scenario"],
+            ["Remplissage tank 1","20-03-2024","/scenario_folder/scene2.scenario"],
+            ["Fermeture pompes","21-03-2024","/scenario_folder/scene3.scenario"],
+            ["observation des pressions","23-03-2024","/scenario_folder/scene4.scenario"]
+        ]
+        for i in range(len(valeur)): 
             iid = self.resultview.insert(
                     parent='', 
                     index=END, 
-                    values=(str(i+1),"junior","junior","junior")
+                    values=(str(i+1),valeur[i][0],valeur[i][1],valeur[i][2])
                 )
             self.resultview.selection_set(iid)
             self.resultview.see(iid)

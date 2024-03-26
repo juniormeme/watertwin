@@ -91,14 +91,16 @@ window.exit_button.visible = False
 window.fps_counter.enabled = False
 window.position =(0,30)
 # paramètres 
+performance = "HIGH"
 eau = {}
 k = 2
 # Les equipements passives de l'environnement 
-#Entity(model='objet/conduit1.obj', texture='texture/conduit.png',scale=k)
-#Entity(model='objet/conduit2.obj', texture='texture/conduit.png',scale=k)
-#Entity(model='objet/conduit3.obj', texture='texture/conduit.png',scale=k)
-#Entity(model='objet/conduit4.obj', texture='texture/conduit.png',scale=k)
-#Entity(model='objet/conduit5.obj', texture='texture/conduit.png',scale=k)
+if performance == "HIGH" : 
+    Entity(model='objet/conduit1.obj', texture='texture/conduit.png',scale=k)
+    Entity(model='objet/conduit2.obj', texture='texture/conduit.png',scale=k)
+    Entity(model='objet/conduit3.obj', texture='texture/conduit.png',scale=k)
+    Entity(model='objet/conduit4.obj', texture='texture/conduit.png',scale=k)
+    Entity(model='objet/conduit5.obj', texture='texture/conduit.png',scale=k)
 
 Button(
     parent=scene,
@@ -120,15 +122,17 @@ Button(
     color=color.white,
     highlight_color=color.gray
     )
-#Entity(model='objet/support_pompe.obj', texture='texture/support_pompe.png',color=color.white,scale=k)
-#Entity(model='objet/ceinture_pompe.obj', texture='texture/ceinture.png',color=color.white,scale=k)
-#Entity(model='objet/fondation.obj', texture='texture/fondation.png',color=color.white,scale=k)
-#Entity(model='objet/structure.obj', texture='texture/structure.png',color=color.white,scale=k)
-#Entity(model='objet/tank.obj',texture='texture/tank.png',color=color.white,scale=k,)
-#Entity(model='objet/tank.obj', texture='texture/tank.png',color=color.white)
-#Entity(model='objet/maison.obj', texture='texture/maison_complet.png',scale=k)
-#Entity(model='objet/panneau_solaire.obj', texture='texture/panneau.png',scale=k)
-Entity(model='objet/objects.obj', texture='texture/texture_bake.png',scale=k)
+if performance == "HIGH" :
+    Entity(model='objet/support_pompe.obj', texture='texture/support_pompe.png',color=color.white,scale=k)
+    Entity(model='objet/ceinture_pompe.obj', texture='texture/ceinture.png',color=color.white,scale=k)
+    Entity(model='objet/fondation.obj', texture='texture/fondation.png',color=color.white,scale=k)
+    Entity(model='objet/structure.obj', texture='texture/structure.png',color=color.white,scale=k)
+    Entity(model='objet/tank.obj',texture='texture/tank.png',color=color.white,scale=k)
+    Entity(model='objet/maison.obj', texture='texture/maison_complet.png',scale=k)
+    Entity(model='objet/panneau_solaire.obj', texture='texture/panneau.png',scale=k)
+else :
+    Entity(model='objet/objects.obj', texture='texture/texture_bake.png',scale=k)
+# Mon bouton pour les batteries
 Button(parent=scene,
        model='objet/batteries.obj', 
        texture='texture/batterie.png',
@@ -148,8 +152,9 @@ eau["VLV10"] = Entity(model='objet/eau_5.obj', texture='texture/mayi.png',scale=
 eau["VLV08"] = Entity(model='objet/eau_6.obj', texture='texture/mayi.png',scale=k,color=color.yellow)
 eau["VLV09"] = eau["VLV08"]
 eau["VLV07"] = Entity(model='objet/eau_7.obj', texture='texture/mayi.png',scale=k,color=color.green)
-#Entity(model='objet/controlbox1.obj',texture='texture/comandbox.png',scale=k,color = color.white)
-#Entity(model='objet/controlbox2.obj',texture='texture/comandbox.png',scale=k,color = color.white)
+if performance == "HIGH" :
+    Entity(model='objet/controlbox1.obj',texture='texture/comandbox.png',scale=k,color = color.white)
+    Entity(model='objet/controlbox2.obj',texture='texture/comandbox.png',scale=k,color = color.white)
 Actionneur(description= "La vanne du conduit 1, on controle le debit",tag="VLV01",model='objet/vanne_1.obj',initial=1)
 Actionneur(description= "La vanne du conduit 4, on controle le debit",tag="VLV04",model='objet/vanne_2.obj',initial=1)
 Actionneur(description= "La vanne du conduit 9, on controle le debit",tag="VLV09",model='objet/vanne_3.obj',initial=1)
@@ -160,7 +165,8 @@ Actionneur(description= "La vanne du conduit 6, on controle le debit",tag="VLV06
 Actionneur(description= "La vanne du conduit 3, on controle le debit",tag="VLV03",model='objet/vanne_8.obj',initial=1)
 Actionneur(description= "La vanne du conduit 7, on controle le debit",tag="VLV07",model='objet/vanne_9.obj',initial=1)
 Actionneur(description= "La vanne du conduit 10, on controle le debit",tag="VLV10",model='objet/vanne_10.obj',initial=1)
-#Entity(model='objet/texte.obj', texture='texture/reste.png',scale=k)
+if performance =="HIGH" :
+    Entity(model='objet/texte.obj', texture='texture/reste.png',scale=k)
 
 niveau_eau_tank1.y = -3.5631611347198486
 niveau_eau_tank2.y = -3.5037078857421875
@@ -172,42 +178,42 @@ def update() :
         niveau_eau_tank1.y += 0.0036*comportement['CANTK1RATE']*time.dt
         niveau_eau_tank2.y += 0.0035*comportement['CANTK2RATE']*time.dt  
         # pour le conduit 2
-        if comportement['CADC02'] >= 20 :
+        if comportement['CADC02'] >= 2 :
             eau['VLV02'].enabled = True
         else: 
             eau['VLV02'].enabled = False
         #pour le conduit 3
-        if comportement['CADC03'] >= 20 :
+        if comportement['CADC03'] >= 2 :
             eau['VLV03'].enabled = True
         else: 
             eau['VLV03'].enabled = False
         #pour le conduit 5   
-        if comportement['CADC05'] >= 20 :
+        if comportement['CADC05'] >= 2 :
             eau['VLV05'].enabled = True
         else: 
             eau['VLV05'].enabled = False
         #pour le conduit 6
-        if comportement['CADC06'] >= 20 :
+        if comportement['CADC06'] >= 2 :
             eau['VLV06'].enabled = True
         else: 
             eau['VLV06'].enabled = False
         #pour le conduit 7
-        if comportement['CADC07'] >= 20 :
+        if comportement['CADC07'] >= 2 :
             eau['VLV07'].enabled = True
         else: 
             eau['VLV07'].enabled = False
         #pour le conduit 11
-        if comportement['CADC11'] >= 20 :
+        if comportement['CADC11'] >= 2 :
             eau['VLV08'].enabled = True
         else: 
             eau['VLV08'].enabled = False
         #pour le conduit 10
-        if comportement['CADC10'] >= 20 :
+        if comportement['CADC10'] >= 2 :
             eau['VLV10'].enabled = True
         else: 
             eau['VLV10'].enabled = False
     except KeyError :
-        print('e')
+        pass
     # virtuels 
     # les limites du niveau d'eau 
     # le tank 1 

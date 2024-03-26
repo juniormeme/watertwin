@@ -66,10 +66,11 @@ class ModelMonitoring(ttk.Frame) :
             # configuration par defaut du voyeur 
             self.figs[0].vision_btn.configure(text="Solveur : Calcul temps réel en cours...", bootstyle="primary")
             self.twin_app.model.stepEulerForward(k=self.k) # on lance le calcul du model 
+            # affichage apres 1 minutes de simulation
             self.figs[0].axe.clear()
             self.figs[0].axe.grid()
-            self.figs[0].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['PMP01'],color='dodgerblue',label="PMP01[Pa]")
-            self.figs[0].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CAPC01'],color='r',label="CAPC01[Pa]")
+            self.figs[0].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['PMP01'],color='dodgerblue',label="PMP01[kPa]")
+            self.figs[0].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CAPC01'],color='r',label="CAPC01[kPa]")
             self.figs[0].axe.legend()
             self.figs[0].figure.canvas.draw()
             self.figs[0].figure.canvas.flush_events()
@@ -83,8 +84,6 @@ class ModelMonitoring(ttk.Frame) :
                 rate1 = 1
                 rate2 = 1
             com.writeValues({
-                'RIEN' : 0,
-                'CADC01' :self.twin_app.model.Y['CADC01'][-1],
                 'CADC02':self.twin_app.model.Y['CADC02'][-1],
                 'CADC03':self.twin_app.model.Y['CADC03'][-1],
                 'CADC05':self.twin_app.model.Y['CADC05'][-1],
@@ -104,8 +103,8 @@ class ModelMonitoring(ttk.Frame) :
         if self.twin_app.runningtext.get() == self.twin_app.running[1] and self.figs[1].vision == True : 
             self.figs[1].axe.clear()
             self.figs[1].axe.grid()
-            self.figs[1].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['PMP02'],color='dodgerblue',label="PMP02[Pa]")
-            self.figs[1].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CAPC04'],color='r',label="CAPC04[Pa]")
+            self.figs[1].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['PMP02'],color='dodgerblue',label="PMP02[kPa]")
+            self.figs[1].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CAPC04'],color='r',label="CAPC04[kPa]")
             self.figs[1].axe.legend()
             self.figs[1].figure.canvas.draw()
             self.figs[1].figure.canvas.flush_events()      
@@ -115,9 +114,9 @@ class ModelMonitoring(ttk.Frame) :
         if self.twin_app.runningtext.get() == self.twin_app.running[1] and self.figs[2].vision == True: 
             self.figs[2].axe.clear()
             self.figs[2].axe.grid()
-            self.figs[2].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CADC01'],color='dodgerblue',label="CADC01[m3/s]")
-            self.figs[2].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CADC02'],color='limegreen',label="CADC02[m3/s]")
-            self.figs[2].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CADC03'],color='C1',label="CADC03[m3/s]")
+            self.figs[2].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CADC01'],color='dodgerblue',label="CADC01[L/s]")
+            self.figs[2].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CADC02'],color='limegreen',label="CADC02[L/s]")
+            self.figs[2].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CADC03'],color='C1',label="CADC03[L/s]")
             self.figs[2].axe.legend()
             self.figs[2].figure.canvas.draw()
             self.figs[2].figure.canvas.flush_events()      
@@ -127,9 +126,9 @@ class ModelMonitoring(ttk.Frame) :
         if self.twin_app.runningtext.get() == self.twin_app.running[1] and self.figs[3].vision == True: 
             self.figs[3].axe.clear()
             self.figs[3].axe.grid()
-            self.figs[3].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CADC04'],color='dodgerblue',label="CADC04[m3/s]")
-            self.figs[3].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CADC05'],color='limegreen',label="CADC05[m3/s]")
-            self.figs[3].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CADC06'],color='C1',label="CADC06[m3/s]")
+            self.figs[3].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CADC04'],color='dodgerblue',label="CADC04[L/s]")
+            self.figs[3].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CADC05'],color='limegreen',label="CADC05[L/s]")
+            self.figs[3].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CADC06'],color='C1',label="CADC06[L/s]")
             self.figs[3].axe.legend()
             self.figs[3].figure.canvas.draw()
             self.figs[3].figure.canvas.flush_events()      
@@ -161,9 +160,9 @@ class ModelMonitoring(ttk.Frame) :
         if self.twin_app.runningtext.get() == self.twin_app.running[1] and self.figs[6].vision == True: 
             self.figs[6].axe.clear()
             self.figs[6].axe.grid()
-            self.figs[6].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CADC07'],color='dodgerblue',label="CADC07[m3/s]")
-            self.figs[6].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CADC11'],color='limegreen',label="CADC11[m3/s]")
-            self.figs[6].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CADC10'],color='C1',label="CADC10[m3/s]")
+            self.figs[6].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CADC07'],color='dodgerblue',label="CADC07[L/s]")
+            self.figs[6].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CADC11'],color='limegreen',label="CADC11[L/s]")
+            self.figs[6].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CADC10'],color='C1',label="CADC10[L/s]")
             self.figs[6].axe.legend()
             self.figs[6].figure.canvas.draw()
             self.figs[6].figure.canvas.flush_events()      
@@ -173,9 +172,9 @@ class ModelMonitoring(ttk.Frame) :
         if self.twin_app.runningtext.get() == self.twin_app.running[1] and self.figs[7].vision == True : 
             self.figs[7].axe.clear()
             self.figs[7].axe.grid()
-            self.figs[7].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CAPC07'],color='dodgerblue',label="CAPC07[Pa]")
-            self.figs[7].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CAPC11'],color='limegreen',label="CAPC11[Pa]")
-            self.figs[7].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CAPC10'],color='C1',label="CAPC10[Pa]")
+            self.figs[7].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CAPC07'],color='dodgerblue',label="CAPC07[kPa]")
+            self.figs[7].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CAPC11'],color='limegreen',label="CAPC11[kPa]")
+            self.figs[7].axe.plot(self.twin_app.model.Temps,self.twin_app.model.Y['CAPC10'],color='C1',label="CAPC10[kPa]")
             self.figs[7].axe.legend()
             self.figs[7].figure.canvas.draw()
             self.figs[7].figure.canvas.flush_events()      

@@ -19,6 +19,8 @@ class Application():
         self.window_width = 1100
         self.window_height = 680
         self.window.geometry(f'{self.window_width}x{self.window_height}+50+6')
+        #ttk.dialogs.dialogs.Messagebox.ok("je suis junior","messagese",self.window)
+        self.actual_panel = 0
         self.barreMenu()
         self.mainPanel()
         
@@ -28,7 +30,7 @@ class Application():
         barre.place(x=0,y=0,relwidth=1)
         ttk.Button(barre,text="Twin model",bootstyle="success", command=lambda:self.switch(1)).grid(row=0,column=0,ipady=10,ipadx=10,sticky='nsew')
         ttk.Button(barre,text="Scenarios",bootstyle="primary",command=lambda : self.switch(2)).grid(row=0,column=1,ipady=10,ipadx=10,sticky='nsew')
-        ttk.Button(barre,text="Inventory",bootstyle="primary",command=lambda : self.switch(3)).grid(row=0,column=2,ipady=10,ipadx=10,sticky='nsew')
+        ttk.Button(barre,text="Trainning",bootstyle="primary",command=lambda : self.switch(3)).grid(row=0,column=2,ipady=10,ipadx=10,sticky='nsew')
         ttk.Button(barre,text="Profiles",bootstyle="primary",command=lambda : self.switch(4)).grid(row=0,column=3,ipady=10,ipadx=10,sticky='nsew')
         ttk.Button(barre,text="Settings",bootstyle="primary",command=lambda : self.switch(5)).grid(row=0,column=4,ipady=10,ipadx=10,sticky='nsew')
         interval = ttk.Frame(barre,bootstyle="primary").grid(row=0,column=5,ipadx=self.window_width,sticky='nsew')
@@ -39,13 +41,14 @@ class Application():
         self.panel1.place(x=0,y=49,relheight=1,relwidth=1)
        
     def switch(self,a): 
+        self.actual_panel = a 
         if a == 1 : 
             TwinApp(self.window).place(x=0,y=49,relheight=1,relwidth=1)
         elif a == 2 : 
             ScenarioApp(self.window).place(x=0,y=49,relheight=1,relwidth=1)  
         elif a == 3 :
             self.panel3 = ttk.Frame(self.window)  
-            ttk.Label(self.panel3,text="Inventory", font="Calibri 32 bold").pack() 
+            ttk.Label(self.panel3,text="trainning", font="Calibri 32 bold").pack() 
             self.panel3.place(x=0,y=49,relheight=1,relwidth=1)
         elif a == 4 :
             self.panel4 = ttk.Frame(self.window)  

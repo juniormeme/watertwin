@@ -34,8 +34,8 @@ class HydraulicModel :
             'VLV10' : 1 ,
         }
         self.CommandePompe = {
-            'PMP01' : 0,
-            'PMP02' : 0
+            'PMP01' : 1,
+            'PMP02' : 1
         }
         # Les axes à manipuler 
         self.Temps = [] 
@@ -170,26 +170,26 @@ class HydraulicModel :
         self.Ic5state = self.Ic5state + Ts * Ic5e
         self.Ic7state = self.Ic7state + Ts * Ic7e
         # Les sorties 
-        self.Y['PMP01'].append(See)
-        self.Y['PMP02'].append(Se1e)
-        self.Y['CADC01'].append(Ic1f)
-        self.Y['CAPC01'].append(See - conduit3e)
-        self.Y['CADC02'].append(Ic2f)
-        self.Y['CADC03'].append(jonction1f)
-        self.Y['CADC04'].append(Ic4f)
-        self.Y['CAPC04'].append(Se1e - conduit6e)
-        self.Y['CADC05'].append(Ic5f)
-        self.Y['CADC06'].append(jonction2f)
+        self.Y['PMP01'].append(See*0.001)
+        self.Y['PMP02'].append(Se1e*0.001)
+        self.Y['CADC01'].append(Ic1f*1000)
+        self.Y['CAPC01'].append((See - conduit3e)*0.001)
+        self.Y['CADC02'].append(Ic2f*1000)
+        self.Y['CADC03'].append(jonction1f*1000)
+        self.Y['CADC04'].append(Ic4f*1000)
+        self.Y['CAPC04'].append((Se1e - conduit6e)*0.001)
+        self.Y['CADC05'].append(Ic5f*1000)
+        self.Y['CADC06'].append(jonction2f*1000)
         self.Y['CANTK1'].append(self.Ct1state/At1)
         self.Y['CAPTK1'].append(Ct1e)
         self.Y['CANTK2'].append(self.Ct2state/At2)
         self.Y['CAPTK2'].append(Ct2e)
-        self.Y['CADC07'].append(Ic7f)
-        self.Y['CAPC07'].append((Ct1e+Pres7e)-Ic7e)
-        self.Y['CADC11'].append(Ic11f)
-        self.Y['CAPC11'].append((conduit8e+Pres11e)-Ic11e)
-        self.Y['CADC10'].append(Ic10f)
-        self.Y['CAPC10'].append((Ct2e+Pres10e)-Ic10e)
+        self.Y['CADC07'].append(Ic7f*1000)
+        self.Y['CAPC07'].append(((Ct1e+Pres7e)-Ic7e)*0.001)
+        self.Y['CADC11'].append(Ic11f*1000)
+        self.Y['CAPC11'].append(((conduit8e+Pres11e)-Ic11e)*0.001)
+        self.Y['CADC10'].append(Ic10f*1000)
+        self.Y['CAPC10'].append(((Ct2e+Pres10e)-Ic10e)*0.001)
         if(len(self.Y['PMP01'])>marge): 
             self.Y['PMP01'].remove(self.Y['PMP01'][0])
             self.Y['PMP02'].remove(self.Y['PMP02'][0])
@@ -216,7 +216,7 @@ class HydraulicModel :
         pass
     
     def runModel(self) : 
-        for i in range(10000) : 
+        for i in range(100000) : 
             self.stepEulerForward(k=i)
 
 
@@ -224,18 +224,18 @@ class HydraulicModel :
 if __name__ == '__main__' :     
     model = HydraulicModel(name="junior")
     model.pas = 0.1
-    model.marge = 10000
+    model.marge = 100000
     model.CommandePompe['PMP01'] = 1
     model.CommandePompe['PMP02'] = 1
-    model.CommandeVanne['VLV07'] = 1
+    model.CommandeVanne['VLV02'] = 0
     model.CommandeVanne['VLV08'] = 1
     model.runModel()
     # Création de la figure
     plt.figure()
 
     # Tracé des courbes
-    plt.plot(model.Temps, model.Y['CADC01'], 'b', label='Debit 1')
-    #plt.plot(model.Temps, model.Y['CAPTK1'], 'r', label='Debit 2')
+    plt.plot(model.Temps, model.Y['CADC01'], 'b', label='debit')
+    plt.plot(model.Temps, model.Y['CADC02'], 'r', label='Debit 2')
     #plt.plot(model.Temps, model.Y['CAPC07'], 'g', label='Debit 3')
     # Ajout d'une légende
     plt.legend()
