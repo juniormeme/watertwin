@@ -75,8 +75,8 @@ class HydraulicModel :
         Rv1r,Rv2r = (13985716.43 * (1-self.CommandeVanne['VLV01'])),(13985716.43*(1-self.CommandeVanne['VLV02']))
         Rv3r,Rv4r = (13985716.43 *(1-self.CommandeVanne['VLV03'])),(13985716.43 *(1-self.CommandeVanne['VLV04']))
         Rv5r,Rv6r = (13985716.43 *(1-self.CommandeVanne['VLV05'])),(13985716.43 *(1-self.CommandeVanne['VLV06']))
-        Rv7r,Rv8r = (13985716.43 *(1-self.CommandeVanne['VLV07'])),(13985716.43 *(1-self.CommandeVanne['VLV08']))
-        Rv9r,Rv10r = (13985716.43 *(1-self.CommandeVanne['VLV09'])),(13985716.43 *(1-self.CommandeVanne['VLV10']))
+        Rv7r,Rv8r = (139857164.3 *(1-self.CommandeVanne['VLV07'])),(139857164.3 *(1-self.CommandeVanne['VLV08']))
+        Rv9r,Rv10r = (139857164.3 *(1-self.CommandeVanne['VLV09'])),(139857164.3 *(1-self.CommandeVanne['VLV10']))
         # Modèle partiellement calibré
         Rp1r,Rp2r,Rp3r=73556.43181,80600.0174,80600.0174
         Rp4r,Rp5r,Rp6r = 84701.34572,80600.0174,80600.0174

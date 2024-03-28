@@ -23,7 +23,10 @@ def readValues():
     with open("../Water Twin by MEME/communication/capture.txt","r") as fich:
         for ligne in fich.readlines(): 
             ligne = ligne.split(" : ")
-            dico[str(ligne[0])] = float(ligne[1])   
+            try :
+                dico[str(ligne[0])] = float(ligne[1])
+            except IndexError :
+                dico[str(ligne[0])] = 1   
         fich.close()
     return dico
 

@@ -148,10 +148,10 @@ eau["VLV05"] = Entity(model='objet/eau_1.obj', texture='texture/mayi.png',scale=
 eau["VLV02"] = Entity(model='objet/eau_2.obj', texture='texture/mayi.png',scale=k)
 eau["VLV06"] = Entity(model='objet/eau_3.obj', texture='texture/mayi.png',scale=k)
 eau["VLV03"] = Entity(model='objet/eau_4.obj', texture='texture/mayi.png',scale=k)
-eau["VLV10"] = Entity(model='objet/eau_5.obj', texture='texture/mayi.png',scale=k,color=color.red)
-eau["VLV08"] = Entity(model='objet/eau_6.obj', texture='texture/mayi.png',scale=k,color=color.yellow)
+eau["VLV10"] = Entity(model='objet/eau_5.obj', texture='texture/mayi.png',scale=k)
+eau["VLV08"] = Entity(model='objet/eau_6.obj', texture='texture/mayi.png',scale=k)
 eau["VLV09"] = eau["VLV08"]
-eau["VLV07"] = Entity(model='objet/eau_7.obj', texture='texture/mayi.png',scale=k,color=color.green)
+eau["VLV07"] = Entity(model='objet/eau_7.obj', texture='texture/mayi.png',scale=k)
 if performance == "HIGH" :
     Entity(model='objet/controlbox1.obj',texture='texture/comandbox.png',scale=k,color = color.white)
     Entity(model='objet/controlbox2.obj',texture='texture/comandbox.png',scale=k,color = color.white)
@@ -175,8 +175,8 @@ def update() :
     # ici on ajuste le comportement de tout le système en fonction des données des capteurs 
     try:
         comportement = com.readValues()
-        niveau_eau_tank1.y += 0.0036*comportement['CANTK1RATE']*time.dt
-        niveau_eau_tank2.y += 0.0035*comportement['CANTK2RATE']*time.dt  
+        niveau_eau_tank1.y += 5*comportement['CANTK1RATE']*time.dt
+        niveau_eau_tank2.y += 5*comportement['CANTK2RATE']*time.dt 
         # pour le conduit 2
         if comportement['CADC02'] >= 2 :
             eau['VLV02'].enabled = True
@@ -247,7 +247,7 @@ def update() :
             
          
 #definitions de l'environement globale 
-#Entity(model='plane', texture='grass',scale=300, texture_scale=(20,10))
+Entity(model='plane', texture='grass',scale=300, texture_scale=(20,10))
 Sky()
 EditorCamera()
 app.run()
