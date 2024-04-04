@@ -35,7 +35,7 @@ class TwinApp(ttk.Frame):
         self.real_time = tk.StringVar()
         self.real_time.set("00:00:00")
         self.running = ['demarrer','arreter']
-        self.running3D = False
+        self.running3D = True
         self.runningtext = tk.StringVar()
         self.runningtext.set(self.running[0])
         # le classement de ces widgets pour le panel de generale 
@@ -44,7 +44,8 @@ class TwinApp(ttk.Frame):
         self.simple_showing('Real time',self.real_time).grid(row=1,column=0,sticky='nsew',padx=5,pady=4,ipadx=60)
         self.gauge_showing(titre='CPU consumption').grid(row=2,column=0,sticky='nsew',padx=5,pady=2)
         self.gauge_showing(titre='RAM consumption',bootstyle='danger').grid(row=3,column=0,sticky='nsew',padx=5)
-        self.runningBtn = ttk.Button(self.gauche,textvariable=self.runningtext,bootstyle='success-outline',command=self.runningTest)
+        self.runningBtn = ttk.Button(self.gauche,textvariable=self.runningtext,
+                                     image="play",compound="left",bootstyle='success-outline',command=self.runningTest)
         self.runningBtn.grid(row=4,column=0,sticky='nsew',padx=5,ipady=4)
         # je vais tester le conteneur principale 
         self.OnRunning()
@@ -130,13 +131,13 @@ class TwinApp(ttk.Frame):
 
     def runningTest(self):
         if self.runningtext.get() == self.running[0] :
-            self.runningBtn.configure(bootstyle='danger-outline')
+            self.runningBtn.configure(bootstyle='danger-outline',image="stop",compound="left")
             self.runningtext.set(self.running[1])
             if self.running3D == False :
                 self.running3D = True
                 self.voir_3D()
         else: 
-            self.runningBtn.configure(bootstyle='success-outline')
+            self.runningBtn.configure(bootstyle='success-outline',image="play",compound="left")
             self.runningtext.set(self.running[0])
     def execute_script_with_sys(self):
         sys.executable

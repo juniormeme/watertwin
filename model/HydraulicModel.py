@@ -219,6 +219,8 @@ class HydraulicModel :
     
     def runModel(self) : 
         for i in range(10000) : 
+            if i >= 5000 :
+                model.CommandeVanne['VLV07'] = 0
             self.stepEulerForward(k=i)
 
 
@@ -226,18 +228,18 @@ class HydraulicModel :
 if __name__ == '__main__' :     
     model = HydraulicModel(name="junior")
     model.pas = 0.1
-    model.marge = 100
+    model.marge = 10000
     model.CommandePompe['PMP01'] = 1
     model.CommandePompe['PMP02'] = 1
-    model.CommandeVanne['VLV07'] = 0
+    model.CommandeVanne['VLV07'] = 1
     model.CommandeVanne['VLV08'] = 0
     model.runModel()
     # Création de la figure
     plt.figure()
 
     # Tracé des courbes
-    plt.plot(model.Temps, model.Y['CANTK1'], 'b', label='Debit 1')
-    #plt.plot(model.Temps, model.Y['CAPTK1'], 'r', label='Debit 2')
+    #plt.plot(model.Temps, model.Y['CANTK1'], 'b', label='Debit 1')
+    plt.plot(model.Temps, model.Y['CADC07'], 'r', label='Debit 2')
     #plt.plot(model.Temps, model.Y['CAPC07'], 'g', label='Debit 3')
     # Ajout d'une légende
     plt.legend()

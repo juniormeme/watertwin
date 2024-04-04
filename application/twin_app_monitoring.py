@@ -6,7 +6,6 @@ from utils.graph import Graphique
 from HydraulicModel import *
 import threading
 import communication as com
-
 class ModelMonitoring(ttk.Frame) : 
     
     def __init__(self,master):
@@ -65,7 +64,7 @@ class ModelMonitoring(ttk.Frame) :
         "Pression d'entré du conduit 1 + presssion de sortie du conduit 1"
         if self.twin_app.runningtext.get() == self.twin_app.running[1] : 
             # configuration par defaut du voyeur 
-            self.figs[0].vision_btn.configure(text="Solveur : Calcul temps réel en cours...", bootstyle="primary")
+            self.figs[0].vision_btn.configure(image="visible",compound="left",text="Solveur : Calcul temps réel en cours...", bootstyle="primary")
             self.twin_app.model.stepEulerForward(k=self.k) # on lance le calcul du model 
             # affichage apres 1 minutes de simulation
             if self.k % (self.update_time/self.twin_app.model.pas) == 0 :
@@ -98,7 +97,7 @@ class ModelMonitoring(ttk.Frame) :
             })
             self.k += 1  
         else :
-            self.figs[0].vision_btn.configure(text="Solveur : Calcul temps réel en arret...", bootstyle="danger")
+            self.figs[0].vision_btn.configure(image="invisible",compound="left",text="Solveur : Calcul temps réel en arret...", bootstyle="danger")
         self.figs[0].after(1,self.figure1)
     def figure2(self):
         "On va monitorer le debit principale du conduit 1 + debit conduit 2 et 3"
@@ -235,8 +234,10 @@ class CommandMonitoring(ttk.Frame) :
         root1 = ttk.Frame(self)
         root1.pack(expand=True,anchor='n')
         # ajout des buttons de capture des donneées et capture des scenarios 
-        ttk.Button(root1,text="capture data",bootstyle="success-outline", command=self.fermevanne).pack(side="left",ipady=10,ipadx=50,padx=5,pady=5)
-        ttk.Button(root1,text="capture sceanrios",bootstyle="success-outline", command=self.fermevanne2).pack(side="left",ipady=10,ipadx=50,padx=5,pady=5)
+        ttk.Button(root1,text="capture data",bootstyle="success-outline", 
+                   image="capture",compound="left",command=self.fermevanne).pack(side="left",ipady=10,ipadx=50,padx=5,pady=5)
+        ttk.Button(root1,text="capture sceanrios",bootstyle="success-outline", 
+                   image="scene",compound="left",command=self.fermevanne2).pack(side="left",ipady=10,ipadx=50,padx=5,pady=5)
     
     def monitorVannes(self): 
         nom = ""
