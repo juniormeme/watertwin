@@ -215,8 +215,10 @@ class HydraulicModel :
     def stopModel(self):
         pass
     
-    def runModel(self) : 
+    def runModel(self) :
         for i in range(100000) : 
+            if i == 50000 :
+                self.CommandeVanne['VLV02'] = 0
             self.stepEulerForward(k=i)
 
 
@@ -227,7 +229,7 @@ if __name__ == '__main__' :
     model.marge = 100000
     model.CommandePompe['PMP01'] = 1
     model.CommandePompe['PMP02'] = 1
-    model.CommandeVanne['VLV02'] = 0
+    model.CommandeVanne['VLV02'] = 1
     model.CommandeVanne['VLV08'] = 1
     model.runModel()
     # Création de la figure
@@ -236,7 +238,7 @@ if __name__ == '__main__' :
     # Tracé des courbes
     plt.plot(model.Temps, model.Y['CADC01'], 'b', label='debit')
     plt.plot(model.Temps, model.Y['CADC02'], 'r', label='Debit 2')
-    #plt.plot(model.Temps, model.Y['CAPC07'], 'g', label='Debit 3')
+    plt.plot(model.Temps, model.Y['CADC03'], 'g', label='Debit 3')
     # Ajout d'une légende
     plt.legend()
 

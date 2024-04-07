@@ -8,16 +8,16 @@ import tkinter as tk
 import ttkbootstrap as ttk 
 from ttkbootstrap.constants import *
 from ttkbootstrap.tableview import Tableview
-from ttkbootstrap.scrolled import ScrolledFrame
 from scenario_monitoring import ScenarioVue
+from scenario_monitoring import ScenarioTesting
 from ttkbootstrap import utility
-from ttkbootstrap.icons import Emoji
-
+import sys,threading,subprocess
 class ScenarioApp(ttk.Frame):
     
     def __init__(self,boss):
         """le constructeur de base"""
         ttk.Frame.__init__(self, master=boss)
+        self.scenario_running = False 
         # Le premier truc est un label frame 
         self.haut = ttk.Frame(self)
         self.haut.pack(anchor='n')
@@ -27,28 +27,31 @@ class ScenarioApp(ttk.Frame):
         self.placer_en_haut()
         self.placer_au_centre()
     def placer_en_haut(self):
+        # le bouton de lancer hors temps reel, il span toute la ligne du dessus la et je diminue les dimensions 
+        ttk.Button(self.haut,image='play',compound="left",bootstyle="success-outline",
+                   text="Tester un scenario",command=self.onClickScenario).grid(row=0,columnspan=3,pady=5,padx=20,ipadx=3,ipady=5,sticky="w")
         # Monitoring des nombres de manière globale
         one = ttk.Frame(self.haut,bootstyle='primary')
         one_frame  = ttk.Frame(one,bootstyle='primary')
         ttk.Label(one_frame,text="Nombre de scenario",font="Consolas 14 bold",bootstyle="light",background='#375A7F').pack(side="top")
         ttk.Label(one_frame,text="12",font="Consolas 16 bold",bootstyle="light",background='#375A7F').pack(side='top')
         one_frame.pack(anchor='center',expand=True)
-        one.grid(column=0,row=0,ipadx=30,ipady=30,padx=20,pady=10,sticky='nsew')
+        one.grid(column=0,row=1,ipadx=30,ipady=30,padx=20,pady=10,sticky='nsew')
         one = ttk.Frame(self.haut,bootstyle='warning')
         one_frame  = ttk.Frame(one,bootstyle='warning')
         ttk.Label(one_frame,text="Nombre de scenario",font="Consolas 14 bold",bootstyle="light",background='#F39C12').pack(side="top")
         ttk.Label(one_frame,text="12",font="Consolas 16 bold",bootstyle="light",background='#F39C12').pack(side='top')
         one_frame.pack(anchor='center',expand=True)
-        one.grid(column=1,row=0,ipadx=30,ipady=30,padx=20,pady=10,sticky='nsew')
+        one.grid(column=1,row=1,ipadx=30,ipady=30,padx=20,pady=10,sticky='nsew')
         one = ttk.Frame(self.haut,bootstyle='danger')
         one_frame  = ttk.Frame(one,bootstyle='danger')
         ttk.Label(one_frame,text="Nombre de scenario",font="Consolas 14",bootstyle="light",background='#E74C3C').pack(side="top")
         ttk.Label(one_frame,text="12",font="Consolas 16 bold",bootstyle="light",background='#E74C3C').pack(side='top')
         one_frame.pack(anchor='center',expand=True)
-        one.grid(column=2,row=0,ipadx=30,ipady=30,padx=20,pady=10,sticky='nsew')
+        one.grid(column=2,row=1,ipadx=30,ipady=30,padx=20,pady=10,sticky='nsew')
         # L'entry pour la recherche d'un scenarios 
         self.searchFrame = ttk.Frame(self.haut,width=201, height=20)
-        self.searchFrame.grid(sticky='nsew',row=1, columnspan=3, padx=22,pady=2)
+        self.searchFrame.grid(sticky='nsew',row=2, columnspan=3, padx=22,pady=2)
         self.placer_au_search()
     def placer_au_centre(self):
         self.resultview = ttk.Treeview(
@@ -118,8 +121,15 @@ class ScenarioApp(ttk.Frame):
     def placer_au_search(self):
         ttk.Label(self.searchFrame,text="Chercher un scenario", font="Calibri 12").pack(side=LEFT,padx=10)
         ttk.Entry(self.searchFrame,font="Calibri 12").pack(side=LEFT,expand=TRUE,fill=X)
-        ttk.Button(self.searchFrame,text=Emoji.get(name='open file folder')).pack(side=LEFT,padx=5,ipady=2,ipadx=2)
-                
+        ttk.Button(self.searchFrame,image="search").pack(side=LEFT,padx=5,ipady=2,ipadx=2)
+           
+    def onClickScenario(self) :
+        #ScenarioTesting()
+        threading.Thread(target=self.execute_script_with_sys).start()
+    
+    def execute_script_with_sys(self):
+        sys.executable
+        subprocess.call([sys.executable,'../Water Twin by MEME/application/scenario_monitoring.py'])
 if __name__ == '__main__' : 
     app = ttk.Window()
     ScenarioApp(app).pack()

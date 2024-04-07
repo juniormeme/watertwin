@@ -66,6 +66,9 @@ class Application():
             PhotoImage(
                 name='invisible', 
                 file=PATH / 'icons8_invisible_24px_4.png'),
+            PhotoImage(
+                name="search",
+                file=PATH / 'icons8_search_22px.png'),
         ]
         self.barreMenu()
         self.mainPanel()
