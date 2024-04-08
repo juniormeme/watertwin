@@ -89,6 +89,8 @@ class ModelMonitoring(ttk.Frame) :
                 'CADC03':self.twin_app.model.Y['CADC03'][-1],
                 'CADC05':self.twin_app.model.Y['CADC05'][-1],
                 'CADC06':self.twin_app.model.Y['CADC06'][-1],
+                'CANTK1': self.twin_app.model.Y['CANTK1'][-1],
+                'CANTK2': self.twin_app.model.Y['CANTK2'][-1],
                 'CANTK1RATE':rate1,
                 'CANTK2RATE':rate2,
                 'CADC07':self.twin_app.model.Y['CADC07'][-1],

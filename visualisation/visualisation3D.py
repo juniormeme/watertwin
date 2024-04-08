@@ -175,8 +175,11 @@ def update() :
     # ici on ajuste le comportement de tout le système en fonction des données des capteurs 
     try:
         comportement = com.readValues()
-        niveau_eau_tank1.y += 5*comportement['CANTK1RATE']*time.dt
-        niveau_eau_tank2.y += 5*comportement['CANTK2RATE']*time.dt 
+        # mouvement du niveau du tank selon la vitesse
+        #niveau_eau_tank1.y += 5*comportement['CANTK1RATE']*time.dt
+        #niveau_eau_tank2.y += 5*comportement['CANTK2RATE']*time.dt 
+        niveau_eau_tank1.y = ((3.5631611347198486*comportement["CANTK1"])/3) - 3.5631611347198486
+        niveau_eau_tank2.y = ((3.5037078857421875*comportement["CANTK2"])/3) - 3.5037078857421875
         # pour le conduit 2
         if comportement['CADC02'] >= 2 :
             eau['VLV02'].enabled = True
@@ -213,6 +216,8 @@ def update() :
         else: 
             eau['VLV10'].enabled = False
     except KeyError :
+        pass
+    except IndexError :
         pass
     # virtuels 
     # les limites du niveau d'eau 

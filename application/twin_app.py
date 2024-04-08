@@ -35,7 +35,7 @@ class TwinApp(ttk.Frame):
         self.real_time = tk.StringVar()
         self.real_time.set("00:00:00")
         self.running = ['demarrer','arreter']
-        self.running3D = True
+        self.running3D = False
         self.runningtext = tk.StringVar()
         self.runningtext.set(self.running[0])
         # le classement de ces widgets pour le panel de generale 

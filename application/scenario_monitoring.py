@@ -144,7 +144,8 @@ class ScenarioTesting :
         plt.figure()
         for x in self.parametre :
             plt.plot(self.model.Temps, self.model.Y[x[1]],f'C{random.randrange(10)}', label=x[1])
-            
+        
+        plt.grid()
         plt.legend()
         plt.show()     
 
