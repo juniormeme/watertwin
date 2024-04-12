@@ -120,7 +120,7 @@ Button(
     origin=0,
     tooltip= Tooltip(text=f'Tag :PMP02 \nDescription :Pompe immergée de 200 L/min',background_color=color.light_gray),
     color=color.white,
-    highlight_color=color.gray
+    highlight_color=color.gray,
     )
 if performance == "HIGH" :
     Entity(model='objet/support_pompe.obj', texture='texture/support_pompe.png',color=color.white,scale=k)
