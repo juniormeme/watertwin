@@ -108,7 +108,7 @@ Button(
     texture='texture/pompe.png',
     scale=k,
     origin=0,
-    tooltip= Tooltip(text=f'Tag :PMP01 \nDescription :Pompe immergée de 150 L/min',background_color=color.light_gray),
+    tooltip= Tooltip(text=f'Tag :PMP01 \nDescription :Pompe immergée 1',background_color=color.light_gray),
     color=color.white,
     highlight_color=color.gray,
     )
@@ -118,7 +118,7 @@ Button(
     texture='texture/pompe.png',
     scale=k,
     origin=0,
-    tooltip= Tooltip(text=f'Tag :PMP02 \nDescription :Pompe immergée de 200 L/min',background_color=color.light_gray),
+    tooltip= Tooltip(text=f'Tag :PMP02 \nDescription :Pompe immergée 2',background_color=color.light_gray),
     color=color.white,
     highlight_color=color.gray,
     )
