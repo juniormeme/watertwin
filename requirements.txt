@@ -1,0 +1,26 @@
+# Water Twin - Digital Twin Application Dependencies
+
+# GUI Framework
+ttkbootstrap>=1.10.0
+# Note: tkinter comes with Python standard library, no installation needed
+
+# Image Processing
+Pillow>=9.0.0
+
+# Scientific Computing
+numpy>=1.21.0
+matplotlib>=3.5.0
+
+# 3D Visualization
+ursina>=5.0.0
+
+# System Monitoring
+psutil>=5.9.0
+
+# Standard library modules (no installation needed):
+# - pathlib
+# - subprocess
+# - sys
+# - threading
+# - math
+
